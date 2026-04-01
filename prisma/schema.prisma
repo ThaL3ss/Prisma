@@ -18,6 +18,7 @@ model User {
   email String  @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  contacts Contacts[]
 
   @@map("users")
 }
@@ -26,7 +27,11 @@ model Contacts {
   id    String  @id @default(uuid())
   name  String
   email String  
+  userId String
   phone String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
 
   @@map("contacts")
 }
